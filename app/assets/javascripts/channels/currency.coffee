@@ -11,4 +11,5 @@ App.currency = App.cable.subscriptions.create "CurrencyChannel",
     # Called when there's incoming data on the websocket for this channel
     console.log('received data:')
     console.log(data)
+    $('#dollar-to-ruble .value').text(data.current_value)
 

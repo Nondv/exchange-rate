@@ -2,7 +2,6 @@
 class CurrencyChannel < ApplicationCable::Channel
   def subscribed
     stream_from :dollar_to_ruble
-    ActionCable.server.broadcast(:dollar_to_ruble, 'test')
   end
 
   def unsubscribed
