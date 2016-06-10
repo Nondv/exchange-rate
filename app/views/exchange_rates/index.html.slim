@@ -1,4 +1,4 @@
-#dollar-to-ruble
-  = '1 USD = '
-  span.value = @rate.current_value
-  = ' RUB'
+h1 == "#{t(:dollar).capitalize} &rarr; #{t(:ruble)} #{t(:exchange_rate)}"
+
+.lead#dollar-to-ruble
+  == "1 USD = <span class='value'>#{@rate.current_value}</span> RUB"
