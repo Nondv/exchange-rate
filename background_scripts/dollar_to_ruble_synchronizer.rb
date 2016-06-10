@@ -8,7 +8,10 @@ raise('run seeds first!') unless @rate
 
 def update_currency
   new_value = usd_rate_from_cbr
-  @rate.update_attributes(value: new_value) if new_value
+  return unless new_value
+
+  @rate.reload
+  @rate.update_attributes(value: new_value)
 end
 
 def usd_rate_from_cbr
