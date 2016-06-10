@@ -13,13 +13,27 @@ RSpec.describe ExchangeRate, type: :model do
     it('has error on :value') { expect(@rate.errors.keys).to include(:value) }
   end
 
+  let(:valid_attributes) do
+    { from: :dollar,
+      to: :ruble,
+      value: 1,
+      forced_value: 1,
+      forced_to: Time.now }
+  end
+
   it 'validates if :value > 0' do
-    rate = ExchangeRate.new from: :dollar,
-                            to: :ruble,
-                            value: 1
+    rate = ExchangeRate.new(valid_attributes)
 
     expect(rate).to be_valid
     rate.value = -1
+    expect(rate).not_to be_valid
+  end
+
+  it 'validates if :forced_value > 0' do
+    rate = ExchangeRate.new(valid_attributes)
+
+    expect(rate).to be_valid
+    rate.forced_value = -1
     expect(rate).not_to be_valid
   end
 end
