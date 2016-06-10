@@ -7,5 +7,5 @@ h1 Admin
 = form_tag
   = text_field_tag(:value, @rate.forced_value)
   br
-  = datetime_local_field_tag(:time, @rate.forced_to)
+  = datetime_field_tag(:time, @rate.forced_to)
   = submit_tag
