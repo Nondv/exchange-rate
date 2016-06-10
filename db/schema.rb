@@ -11,15 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160610092059) do
+ActiveRecord::Schema.define(version: 20160610155201) do
 
   create_table "exchange_rates", force: :cascade do |t|
-    t.integer  "from",       null: false
-    t.integer  "to",         null: false
-    t.float    "value",      null: false
+    t.integer  "from",         null: false
+    t.integer  "to",           null: false
+    t.float    "value",        null: false
     t.datetime "frozen_to"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.float    "forced_value"
+    t.datetime "forced_to"
     t.index ["from"], name: "index_exchange_rates_on_from"
     t.index ["frozen_to"], name: "index_exchange_rates_on_frozen_to"
     t.index ["to"], name: "index_exchange_rates_on_to"
