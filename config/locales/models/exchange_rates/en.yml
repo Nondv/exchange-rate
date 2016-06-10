@@ -1,0 +1,8 @@
+en:
+  activerecord:
+    errors:
+      models:
+        exchange_rate:
+          attributes:
+            forced_value:
+              should_be_positive: 'should be positive'

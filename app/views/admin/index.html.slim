@@ -1,0 +1,11 @@
+h1 Admin
+
+- if @rate.errors.any?
+  - @rate.errors.full_messages.each do |e|
+    strong = e
+
+= form_tag
+  = text_field_tag(:value, @rate.forced_value)
+  br
+  = datetime_local_field_tag(:time, @rate.forced_to)
+  = submit_tag
