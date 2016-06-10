@@ -16,7 +16,7 @@ RSpec.describe ExchangeRate, type: :model do
   let(:valid_attributes) do
     { from: :dollar,
       to: :ruble,
-      value: 1,
+      value: 10,
       forced_value: 1,
       forced_to: Time.now }
   end
@@ -35,5 +35,29 @@ RSpec.describe ExchangeRate, type: :model do
     expect(rate).to be_valid
     rate.forced_value = -1
     expect(rate).not_to be_valid
+  end
+
+  describe '#current_value method' do
+    context 'when forced_to in the future' do
+      before(:each) do
+        @rate = ExchangeRate.create!(valid_attributes)
+        @rate.update_attributes!(forced_to: Date.today + 1)
+      end
+
+      it 'returns forced value' do
+        expect(@rate.current_value).to eq(@rate.forced_value)
+      end
+    end
+
+    context 'when forced_to in the past' do
+      before(:each) do
+        @rate = ExchangeRate.create!(valid_attributes)
+        @rate.update_attributes!(forced_to: Date.today - 1)
+      end
+
+      it 'returns .value' do
+        expect(@rate.current_value).to eq(@rate.value)
+      end
+    end
   end
 end

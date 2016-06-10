@@ -9,6 +9,12 @@ class ExchangeRate < ApplicationRecord
   validate :value_should_be_positive, if: -> { value.present? }
   validate :forced_value_should_be_positive, if: -> { forced_value.present? }
 
+
+  def current_value
+    return value unless forced_value
+    forced_to > Time.now ? forced_value : value
+  end
+
   private
 
   def value_should_be_positive
