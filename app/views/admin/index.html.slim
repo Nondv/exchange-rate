@@ -1,11 +1,24 @@
-h1 Admin
+h1 Admin interface (welcome everyone!)
 
 - if @rate.errors.any?
+  ul
   - @rate.errors.full_messages.each do |e|
-    strong = e
+    li.text-danger = e
+.row
+  .col-md-4
+    = form_tag
+      .form-group
+        = label_tag :value,
+                    @rate.class.human_attribute_name(:forced_value),
+                    class: 'control-label'
+        = text_field_tag(:value, @rate.forced_value, class: 'form-control')
 
-= form_tag
-  = text_field_tag(:value, @rate.forced_value)
-  br
-  = datetime_field_tag(:time, @rate.forced_to)
-  = submit_tag
+      .form_group
+        = label_tag :time,
+                    @rate.class.human_attribute_name(:forced_to),
+                    class: 'control-label'
+        = datetime_local_field_tag :time,
+                                   @rate.forced_to.strftime('%Y-%m-%dT%H:%M'),
+                                   class: 'form-control'
+      br
+      = submit_tag nil, class: 'btn btn-primary'
