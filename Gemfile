@@ -41,6 +41,7 @@ group :development, :test do
   gem 'byebug', platform: :mri
   gem "rails-controller-testing", :git => "https://github.com/rails/rails-controller-testing"
   gem 'rspec-rails', '3.5.0.beta4'
+  gem 'simplecov', require: false
 end
 
 group :development do
