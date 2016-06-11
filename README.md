@@ -1,24 +1,28 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Sample project that uses Ruby 2.3.0, Rails 5 and some of its features:
 
-Things you may want to cover:
+* Action cable
+* Enum prefixes
+* Actually, that's all:D
 
-* Ruby version
+It has only 2 pages: `/` and `/admin`.
+On root you can see dollar to ruble exchange rate.
 
-* System dependencies
+In admin interface you can force value (by the way, background script
+updates value automatically) on some time.
 
-* Configuration
+# Requirements
 
-* Database creation
+* Rails 5
+* Sqlite
+* Redis
+* Foreman (it is in gemfile)
 
-* Database initialization
+# Launching
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+1. Clone repo
+2. `bundle install`
+3. `rails db:schema:load` or `rails db:migrate`
+4. `rails db:seed` - it is **important**!
+5. `foreman start`
