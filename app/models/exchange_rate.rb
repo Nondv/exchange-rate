@@ -6,8 +6,10 @@ class ExchangeRate < ApplicationRecord
   enum to: CURRENCIES, _prefix: true
 
   validates :from, :to, :value, presence: true
-  validate :value_should_be_positive, if: -> { value.present? }
-  validate :forced_value_should_be_positive, if: -> { forced_value.present? }
+  validates :value, numericality: { greater_than: 0 }
+  validates :forced_value,
+            numericality: { greater_than: 0 },
+            if: -> { forced_value.present? }
 
   after_save :broadcast_current_value
 
@@ -17,14 +19,6 @@ class ExchangeRate < ApplicationRecord
   end
 
   private
-
-  def value_should_be_positive
-    errors.add(:value, :should_be_positive) if value <= 0
-  end
-
-  def forced_value_should_be_positive
-    errors.add(:forced_value, :should_be_positive) if forced_value <= 0
-  end
 
   def broadcast_current_value
     stream = "#{from}_to_#{to}".to_sym
